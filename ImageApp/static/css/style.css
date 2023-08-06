@@ -1,0 +1,7 @@
+.cart{
+ display: flex;
+ flex-wrap: wrap; 
+}
+.cart{
+    flex-direction: row;
+}

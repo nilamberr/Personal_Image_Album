@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+     <div class="py-5 text-center bg-secondary text-white">
+        <h1 class="mb-3">Image Upload</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% comment %} This is for showing errors like wrong password {% endcomment %}
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+             <p>{{error}}</p>
+            {% endfor %}
+            {% endif %}
+            {% for fm in form %}
+             {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+            {% endfor %}
+            <input type="submit" class='btn btn-success' value="Upload"> 
+         </form>
+     </div class="row">
+        <div class="cart">
+            {% for images in img %}
+         <div class="col-sm-4">
+         <div class="card m-2">
+            <img src="{{images.photo.url}}" alt="" class="card-img-top" height="200px">
+            <div class="card-footer">
+                <small class="">{{images.post}}</small>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{images.date}}</small>
+            </div>
+         </div>
+        </div>
+        {% endfor %}+
+        </div>
+    </div>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/popper.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
